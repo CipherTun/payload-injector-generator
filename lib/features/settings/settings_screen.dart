@@ -21,13 +21,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Card(
               child: Column(
                 children: [
-                  const SwitchListTile(
+                  SwitchListTile(
                     value: confirmExports,
                     onChanged: (v) => setState(() => confirmExports = v),
                     title: const Text('Confirm exports'),
                     subtitle: const Text('Ask before copying/exporting generated content.'),
                   ),
-                  const SwitchListTile(
+                  SwitchListTile(
                     value: showWarnings,
                     onChanged: (v) => setState(() => showWarnings = v),
                     title: const Text('Show validation warnings'),
@@ -37,16 +37,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 14),
-            Card(
-              child: const ListTile(
+            const Card(
+              child: ListTile(
                 leading: Icon(Icons.security_rounded),
                 title: Text('Privacy model'),
                 subtitle: Text('PayloadLab performs generation and analysis locally. It does not send generated content to a remote service.'),
               ),
             ),
             const SizedBox(height: 14),
-            Card(
-              child: const ListTile(
+            const Card(
+              child: ListTile(
                 leading: Icon(Icons.info_outline_rounded),
                 title: Text('PayloadLab 1.0'),
                 subtitle: Text('Offline construction, inspection and validation workspace.'),
