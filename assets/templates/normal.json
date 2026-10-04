@@ -1,0 +1,7 @@
+{
+  "name": "Normal",
+  "type": "normal",
+  "method": "CONNECT",
+  "protocol": "HTTP/1.1",
+  "notes": "Basic HTTP-style request construction for local inspection."
+}

@@ -1,0 +1,7 @@
+{
+  "name": "WebSocket handshake",
+  "type": "websocket",
+  "method": "GET",
+  "protocol": "HTTP/1.1",
+  "notes": "Standard HTTP Upgrade/Connection handshake layout."
+}
