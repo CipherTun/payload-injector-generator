@@ -21,13 +21,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Card(
               child: Column(
                 children: [
-                  SwitchListTile(
+                  const SwitchListTile(
                     value: confirmExports,
                     onChanged: (v) => setState(() => confirmExports = v),
                     title: const Text('Confirm exports'),
                     subtitle: const Text('Ask before copying/exporting generated content.'),
                   ),
-                  SwitchListTile(
+                  const SwitchListTile(
                     value: showWarnings,
                     onChanged: (v) => setState(() => showWarnings = v),
                     title: const Text('Show validation warnings'),
