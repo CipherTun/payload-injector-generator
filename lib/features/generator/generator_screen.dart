@@ -51,6 +51,9 @@ class _GeneratorScreenState extends ConsumerState<GeneratorScreen> {
   Future<void> save() async {
     final value = result;
     if (value == null || !value.isValid) return;
+
+    final messenger = ScaffoldMessenger.of(context);
+
     await ref.read(historyProvider.notifier).add(
           HistoryEntry(
             id: DateTime.now().microsecondsSinceEpoch.toString(),
@@ -59,7 +62,11 @@ class _GeneratorScreenState extends ConsumerState<GeneratorScreen> {
             createdAt: DateTime.now(),
           ),
         );
-    if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Saved to local history')));
+
+    if (!mounted) return;
+    messenger.showSnackBar(
+      const SnackBar(content: Text('Saved to local history')),
+    );
   }
 
   @override
@@ -83,7 +90,7 @@ class _GeneratorScreenState extends ConsumerState<GeneratorScreen> {
           ]),
           const SizedBox(height: 12),
           DropdownButtonFormField<String>(
-            value: protocol,
+            initialValue: protocol,
             decoration: const InputDecoration(labelText: 'Protocol'),
             items: const [
               DropdownMenuItem(value: 'HTTP/1.0', child: Text('HTTP/1.0')),
@@ -93,7 +100,7 @@ class _GeneratorScreenState extends ConsumerState<GeneratorScreen> {
           ),
           const SizedBox(height: 12),
           DropdownButtonFormField<PayloadType>(
-            value: type,
+            initialValue: type,
             decoration: const InputDecoration(labelText: 'Template'),
             items: [
               for (final item in PayloadType.values)
@@ -153,10 +160,20 @@ class _GeneratorScreenState extends ConsumerState<GeneratorScreen> {
           ),
           if (resultValue != null) ...[
             const SizedBox(height: 18),
-            _ResultCard(result: resultValue, onCopy: () async {
-              await Clipboard.setData(ClipboardData(text: resultValue.payload));
-              if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Copied')));
-            }, onSave: save),
+            _ResultCard(
+              result: resultValue,
+              onCopy: () async {
+                final messenger = ScaffoldMessenger.of(context);
+                await Clipboard.setData(
+                  ClipboardData(text: resultValue.payload),
+                );
+                if (!mounted) return;
+                messenger.showSnackBar(
+                  const SnackBar(content: Text('Copied')),
+                );
+              },
+              onSave: save,
+            ),
           ],
         ],
       ),

@@ -32,7 +32,7 @@ class PayloadEngine {
       return PayloadResult(payload: '', warnings: warnings, errors: errors);
     }
 
-    final crlf = '\r\n';
+    const crlf = '\r\n';
     final authority = '$host:${spec.port}';
     final method = spec.method.trim().toUpperCase();
     final protocol = spec.protocol.trim();

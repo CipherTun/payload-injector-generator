@@ -19,12 +19,12 @@ class PayloadLabApp extends StatelessWidget {
       ShellRoute(
         builder: (context, state, child) => PayloadShell(child: child),
         routes: [
-          GoRoute(path: '/home', builder: (_, __) => const HomeScreen()),
-          GoRoute(path: '/studio', builder: (_, __) => const GeneratorScreen()),
-          GoRoute(path: '/editor', builder: (_, __) => const EditorScreen()),
-          GoRoute(path: '/templates', builder: (_, __) => const TemplatesScreen()),
-          GoRoute(path: '/history', builder: (_, __) => const HistoryScreen()),
-          GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
+          GoRoute(path: '/home', builder: (_, _) => const HomeScreen()),
+          GoRoute(path: '/studio', builder: (_, _) => const GeneratorScreen()),
+          GoRoute(path: '/editor', builder: (_, _) => const EditorScreen()),
+          GoRoute(path: '/templates', builder: (_, _) => const TemplatesScreen()),
+          GoRoute(path: '/history', builder: (_, _) => const HistoryScreen()),
+          GoRoute(path: '/settings', builder: (_, _) => const SettingsScreen()),
         ],
       ),
     ],

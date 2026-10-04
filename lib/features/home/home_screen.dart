@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/providers.dart';
+import '../../domain/payload.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -34,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(height: 18),
           Row(
             children: [
-              Expanded(child: _StatCard(label: 'Saved', value: history.valueOrNull?.length.toString() ?? '—')),
+              Expanded(child: _StatCard(label: 'Saved', value: history.value?.length.toString() ?? '—')),
               const SizedBox(width: 12),
               const Expanded(child: _StatCard(label: 'Offline', value: '100%')),
             ],
@@ -65,10 +66,10 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(height: 10),
           if (history.isLoading)
             const Center(child: Padding(padding: EdgeInsets.all(24), child: CircularProgressIndicator()))
-          else if (history.valueOrNull?.isEmpty ?? true)
+          else if (history.value?.isEmpty ?? true)
             const _EmptyCard()
           else
-            for (final entry in history.value!.take(4))
+            for (final entry in (history.value ?? const <HistoryEntry>[]).take(4))
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                 leading: const CircleAvatar(child: Icon(Icons.code_rounded, size: 18)),

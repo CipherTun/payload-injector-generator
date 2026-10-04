@@ -16,7 +16,7 @@ class HistoryController extends AsyncNotifier<List<HistoryEntry>> {
   Future<List<HistoryEntry>> build() => ref.read(historyRepositoryProvider).load();
 
   Future<void> add(HistoryEntry entry) async {
-    final current = [...(state.valueOrNull ?? const [])];
+    final current = [...(state.value ?? const <HistoryEntry>[])];
     current.insert(0, entry);
     final trimmed = current.take(100).toList();
     await ref.read(historyRepositoryProvider).save(trimmed);
@@ -24,7 +24,7 @@ class HistoryController extends AsyncNotifier<List<HistoryEntry>> {
   }
 
   Future<void> remove(String id) async {
-    final current = [...(state.valueOrNull ?? const [])]..removeWhere((e) => e.id == id);
+    final current = [...(state.value ?? const <HistoryEntry>[])]..removeWhere((e) => e.id == id);
     await ref.read(historyRepositoryProvider).save(current);
     state = AsyncData(current);
   }
